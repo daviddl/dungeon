@@ -121,37 +121,37 @@ module constants
     const sfxSmallFootstepGrassD : int := 13    
     const sfxSmallFootstepGrassE : int := 14
 
-    const footSmallDirtA: string := "../res/music/sfx/footsteps/mfootsmalldirta.wav"
-    const footSmallDirtB: string := "../res/music/sfx/footsteps/mfootsmalldirtb.wav"
-    const footSmallDirtC: string := "../res/music/sfx/footsteps/mfootsmalldirtc.wav"
-    const footSmallDirtD: string := "../res/music/sfx/footsteps/mfootsmalldirtd.wav"
-    const footSmallDirtE: string := "../res/music/sfx/footsteps/mfootsmalldirte.wav"
+    const footSmallDirtA: string := "../res/sfx/footsteps/mfootsmalldirta.wav"
+    const footSmallDirtB: string := "../res/sfx/footsteps/mfootsmalldirtb.wav"
+    const footSmallDirtC: string := "../res/sfx/footsteps/mfootsmalldirtc.wav"
+    const footSmallDirtD: string := "../res/sfx/footsteps/mfootsmalldirtd.wav"
+    const footSmallDirtE: string := "../res/sfx/footsteps/mfootsmalldirte.wav"
 
-    const footSmallStoneA: string := "../res/music/sfx/footsteps/mfootsmallstonea.wav"
-    const footSmallStoneB: string := "../res/music/sfx/footsteps/mfootsmallstoneb.wav"
-    const footSmallStoneC: string := "../res/music/sfx/footsteps/mfootsmallstonec.wav"
-    const footSmallStoneD: string := "../res/music/sfx/footsteps/mfootsmallstoned.wav"
-    const footSmallStoneE: string := "../res/music/sfx/footsteps/mfootsmallstonee.wav"
+    const footSmallStoneA: string := "../res/sfx/footsteps/mfootsmallstonea.wav"
+    const footSmallStoneB: string := "../res/sfx/footsteps/mfootsmallstoneb.wav"
+    const footSmallStoneC: string := "../res/sfx/footsteps/mfootsmallstonec.wav"
+    const footSmallStoneD: string := "../res/sfx/footsteps/mfootsmallstoned.wav"
+    const footSmallStoneE: string := "../res/sfx/footsteps/mfootsmallstonee.wav"
     
-    const footSmallGrassA: string := "../res/music/sfx/footsteps/mfootsmallgrassa.wav"
-    const footSmallGrassB: string := "../res/music/sfx/footsteps/mfootsmallgrassb.wav"
-    const footSmallGrassC: string := "../res/music/sfx/footsteps/mfootsmallgrassc.wav"
-    const footSmallGrassD: string := "../res/music/sfx/footsteps/mfootsmallgrassd.wav"
-    const footSmallGrassE: string := "../res/music/sfx/footsteps/mfootsmallgrasse.wav"
+    const footSmallGrassA: string := "../res/sfx/footsteps/mfootsmallgrassa.wav"
+    const footSmallGrassB: string := "../res/sfx/footsteps/mfootsmallgrassb.wav"
+    const footSmallGrassC: string := "../res/sfx/footsteps/mfootsmallgrassc.wav"
+    const footSmallGrassD: string := "../res/sfx/footsteps/mfootsmallgrassd.wav"
+    const footSmallGrassE: string := "../res/sfx/footsteps/mfootsmallgrasse.wav"
     
     %---------------------------------------------------------------------------
     % Ambiance
     const sfxAmbienceForestHighDay : int := 0
-    const ambienceForestHighDay: string := "../res/music/sfx/ambience/foresthighday.mp3"
+    const ambienceForestHighDay: string := "../res/sfx/ambience/foresthighday.mp3"
     
     %---------------------------------------------------------------------------
     % Coup des armes
     const sfxm1hswordhitplate1a : int := 0
     const sfxm1hswordhitplate1b : int := 1
     const sfxm1hswordhitplate1c : int := 2
-    const m1hswordhitplate1a    : string := "../res/music/sfx/sword1h/m1hswordhitplate1a.wav"
-    const m1hswordhitplate1b    : string := "../res/music/sfx/sword1h/m1hswordhitplate1b.wav"
-    const m1hswordhitplate1c    : string := "../res/music/sfx/sword1h/m1hswordhitplate1c.wav"
+    const m1hswordhitplate1a    : string := "../res/sfx/sword1h/m1hswordhitplate1a.wav"
+    const m1hswordhitplate1b    : string := "../res/sfx/sword1h/m1hswordhitplate1b.wav"
+    const m1hswordhitplate1c    : string := "../res/sfx/sword1h/m1hswordhitplate1c.wav"
     
     %---------------------------------------------------------------------------
     %Objet Obtenu: Tresores
