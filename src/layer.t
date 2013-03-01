@@ -1,4 +1,4 @@
-% Authors:  David Delisle-Lalancette
+% Authors:  Richard Lalancette
 unit
 
 %---------------------------------------------------------------------------

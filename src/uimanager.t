@@ -198,7 +198,7 @@ class UIManager
     if state = "dead" then
         Font.Draw ( "Tu est mort...", maxx div 2 - 250, maxy div 2 + 100, fontCritFront, white)
     elsif state = "alive" then
-        Font.Draw ( "Tu est vainceur!" + intstr (finalScore), maxx div 2 - 250, maxy div 2 + 100, fontCritFront, white)        
+        Font.Draw ( "Tu est vainceur!", maxx div 2 - 250, maxy div 2 + 100, fontCritFront, white)        
     end if
     Font.Draw ( "Ton pointage final est: " + intstr (finalScore), maxx div 2 - 250, maxy div 2, fontCritFront, white)  
     

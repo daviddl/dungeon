@@ -1,6 +1,7 @@
 unit
 
 %---------------------------------------------------------------------------
+% David Delisle Lalancette, Richard Lalancette
 % Change le point de vue du joueur
 class Camera
     

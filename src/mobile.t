@@ -108,9 +108,11 @@ class Mobile
     end loadObjectGid
     
     %---------------------------------------------------------------------------
+    % David Delisle Lalancette
     deferred procedure setScore(newScore : int)
     
     %---------------------------------------------------------------------------
+    % David Delisle Lalancette
     % Use enum for avatar states (Alive, dead, poisoned... etc)
     procedure loseHealth ( damage: int)
         health := health - damage
@@ -121,7 +123,7 @@ class Mobile
     end loseHealth
     
     %---------------------------------------------------------------------------
-    % Use enum for avatar states (Alive, dead, poisoned... etc)
+    % David Delisle Lalancette
     procedure gainHealth ( healing: int)
         if mobileState = mobileStateEnum.alive then
         health := health + healing
@@ -161,7 +163,6 @@ class Mobile
         var cameraX : int := cameraPosition->x - maxx div 2 
         var cameraY : int := cameraPosition->y - maxy div 2
         
-        % draw slightly up so it feels natural.
         if( mobileState = mobileStateEnum.dying ) then
             %if mobileStateTime = 0 then
             %   avatar -> score := avatar -> score + monster -> score
@@ -180,8 +181,6 @@ class Mobile
         else
             Pic.Draw (spriteSheet->sprites(frame), position->x - cameraX, position->y + constants.cTilesize div 4 - cameraY, picMerge)
         end if
-        % Pic.Draw (sprites(frame), x, y+constants.cTilesize div 4, picMerge)
-        % ^ "spriteDirection" est pour la direction du personage et l'etat de son mouvement.
     end drawObject
     
     %---------------------------------------------------------------------------
@@ -337,6 +336,7 @@ class Mobile
    end pickupInteractableItem
  
     %---------------------------------------------------------------------------
+    % David Delisle Lalancette
     %
     function getTileInDirection( position : ^ Tuple2i ) : ^ Tuple2i
         var targetTileX : int
@@ -442,6 +442,7 @@ class Mobile
     end setLevel
     
     %---------------------------------------------------------------------------
+    % David Delisle Lalancette
     % Atttaque le monstre situer devant le joueur
     deferred function attackInDirection() : ^ Tuple2i
     body function attackInDirection() : ^ Tuple2i
@@ -465,6 +466,7 @@ class Mobile
     end processInput
     
     %---------------------------------------------------------------------------
+    % David Delisle Lalancette
     function isAlive() : boolean
         if mobileState = mobileStateEnum.alive or mobileState = mobileStateEnum.attacking then
             result true

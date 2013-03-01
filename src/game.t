@@ -17,11 +17,26 @@ class Game
     var currentLevel : ^ Level
     var font1, font2, font3 : int % standard font
     var levelSequence : int := 0
-    var levelNames : array 0 .. 9 of string
+    var levelNames : array 0 .. 6 of string
     var ui : ^ UIManager
     var readyToLeave : boolean := false
     var avatarScore : int := 0
     var avatarHealth : int := 0
+    
+    %---------------------------------------------------------------------------
+    % David Delisle Lalancette
+    % Prepare la sequence des niveaux ("level")
+    procedure prepareLevelNames()
+        for i : 0 .. upper(levelNames)
+            if i < 9 then
+                levelNames(i) := "lvl0" + intstr(i + 1) + "s"
+            elsif i >= 9 then
+                levelNames(i) := "lvl" + intstr(i + 1) + "s"
+            else
+                %Le nom du niveau sera pas storer.
+            end if
+        end for
+    end prepareLevelNames
     
     %---------------------------------------------------------------------------
     % Constructeur
@@ -35,6 +50,8 @@ class Game
         % Initialise l'interface d'utilisateur
         new UIManager, ui
         ui->create()
+        
+        prepareLevelNames()
         
         SpriteSheetManager.create()
         
@@ -78,51 +95,7 @@ class Game
     end destroy
     
     %---------------------------------------------------------------------------
-    % Charge le niveau
-    function loadLevel ( tilesheet : string, levelToLoad : string ) : boolean
-            result currentLevel -> loadLevel(tilesheet, levelToLoad)
-    end loadLevel
-    
-    %---------------------------------------------------------------------------
-    % Prepare la sequence des niveaux ("level")
-    procedure prepareLevelNames()
-        for i : 0 .. upper(levelNames)
-            if i < 9 then
-                levelNames(i) := "lvl0" + intstr(i + 1) + "s"
-            elsif i >= 9 then
-                levelNames(i) := "lvl" + intstr(i + 1) + "s"
-            else
-                %Le nom du niveau sera pas storer.
-            end if
-        end for
-    end prepareLevelNames
-    
-    %---------------------------------------------------------------------------
-    % Charge le prochain niveau
-    function goToNextLevel() : boolean
-        var levelToLoad : string := ""
-        var tilesheet : string := "t01s"
-        
-        % Conserver les points de vie et le pointage du joueur en changeant de niveau
-        avatarScore := currentLevel -> getAvatarScore()
-        avatarHealth := currentLevel -> getAvatarHealth()
-        
-        % Changer de niveau
-        currentLevel -> destroy()
-        prepareLevelNames()
-        levelToLoad := levelNames(levelSequence)
-        levelSequence += 1
-            
-        currentLevel->create()
-        var success : boolean := currentLevel -> loadLevel(tilesheet, levelToLoad)
-        
-        currentLevel -> setAvatarScore (avatarScore)
-        currentLevel -> setAvatarHealth (avatarHealth)
-        
-        result success
-    end goToNextLevel
-    
-     %---------------------------------------------------------------------------
+    % David Delisle Lalancette
     procedure gameOver(avatarState : string)
         var finalScore : int := 0
         var state : string := avatarState
@@ -130,16 +103,55 @@ class Game
         state := "alive"
         end if
         loop
-        cls
-        drawfillbox ( 0, 0, maxx, maxy, black )
-        finalScore := currentLevel -> getAvatarScore()
-        ui -> drawFinalScore(finalScore, state)
-        View.Update
+            cls
+            drawfillbox ( 0, 0, maxx, maxy, black )
+            finalScore := currentLevel -> getAvatarScore()
+            ui -> drawFinalScore(finalScore, state)
+            View.Update
         end loop
     end gameOver
     
     %---------------------------------------------------------------------------
-    % Function Principal du jeu
+    % David Delisle Lalancette
+    % Charge le niveau
+    function loadLevel ( tilesheet : string, levelToLoad : string ) : boolean
+            result currentLevel -> loadLevel(tilesheet, levelToLoad)
+    end loadLevel
+    
+    %---------------------------------------------------------------------------
+    % David Delisle Lalancette
+    % Charge le prochain niveau
+    function goToNextLevel() : boolean
+        var levelToLoad : string := ""
+        var tilesheet : string := "t01s"
+        
+        % Changer de niveau
+            
+            levelToLoad := levelNames(levelSequence)
+            levelSequence += 1
+        
+        % Verifie si le joueur a atteint le dernier niveau
+        if levelSequence = 7 then
+            gameOver("alive")
+        else
+            % Conserver les points de vie et le pointage du joueur en changeant de niveau
+            avatarScore := currentLevel -> getAvatarScore()
+            avatarHealth := currentLevel -> getAvatarHealth()
+    
+            currentLevel -> destroy()
+    
+            currentLevel->create()
+            var success : boolean := currentLevel -> loadLevel(tilesheet, levelToLoad)
+        
+            currentLevel -> setAvatarScore (avatarScore)
+            currentLevel -> setAvatarHealth (avatarHealth)
+            result success
+        end if
+    end goToNextLevel
+    
+    %---------------------------------------------------------------------------
+    % David Delisle Lalancette, Richard Lalancette
+    % Fonction principal du jeu
     procedure run()
         var success : boolean := true
         var now : int := 0
@@ -147,8 +159,9 @@ class Game
         var inputProcessed : boolean := false;
         var avatarState : string := ""
         
+        %Initialisation du niveau menu principal
         success := loadLevel("tTitle", "lvlTitle")
-        %success := loadLevel("t01s", "lvl05s")
+        %success := loadLevel("t01s", "lvl06s")
         
         if( success ) then 
             loop
@@ -161,16 +174,17 @@ class Game
                 end if
                 
                 cls
+                % Mise a jour du niveau
                 currentLevel -> update()
                 currentLevel -> drawLevel()
                 ui->update( currentLevel -> getAvatarScore(), currentLevel -> getAvatarHealth() )
                 ui->drawUI(currentLevel->getCameraPosition())
                 
-                %Est-ce que le joueur est mort?
+                %Est-ce que le joueur est mort, si oui, afficher le pointage du joueur
                 var currentAvatarHealth  : int := 0
                 currentAvatarHealth := currentLevel -> getAvatarHealth()
                 if currentAvatarHealth <= 0 then
-                avatarState := "dead"
+                    avatarState := "dead"
                     gameOver(avatarState)
                 end if
                 

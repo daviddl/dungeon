@@ -272,15 +272,6 @@ class LevelImpl
             new monsterObjects, upper( monsterObjects ) + 1
             monsterObjects( upper( monsterObjects ) ) := monsterObject
             
-            /*debug
-            var c : char
-            cls
-            Font.Draw ( monsterObject->toString(), 50, 230, font1, white)
-            Font.Draw ( "upper monsterObjects:" + intstr( upper( monsterObjects ) ), 50, 210, font1, white)
-            View.Update                
-            get c
-            */
-            
             spawnMonster(monsterObject)
             
             lastIndex += 1 % next line...
@@ -342,19 +333,6 @@ class LevelImpl
             lastIndex += 1 % next line...
             end loop
         end if
-
-        /*%---------------------------------------------------------------------------
-         debug
-        for blah : 0 .. 1
-            cls
-            Font.Draw (intstr( triggers(blah)->getGid() ), 50, 230, font1, white)
-            Font.Draw (intstr( triggers(blah)->getX() ), 50, 210, font1, white)
-            Font.Draw (intstr( triggers(blah)->getY() ), 50, 190, font1, white)
-            Font.Draw ( "upper" + intstr( upper( triggers ) ), 50, 170, font1, white)
-            View.Update                
-            get c
-        end for
-        */%---------------------------------------------------------------------------
 
         result success
     end prepareTriggerGroup
@@ -427,14 +405,6 @@ class LevelImpl
                     end loop
 
                     tilePropertyObjects( id ) := tilePropertyObject
-                    
-                    % debug
-                    %var c : char
-                    %cls
-                    %Font.Draw ( "Object: " + tilePropertyObjects( gid )->toString(), 50, 230, font1, white)
-                    %Font.Draw ( "upper: " + intstr( upper( tilePropertyObjects ) ), 50, 170, font1, white)
-                    %View.Update                
-                    %get c
                     
                     lastIndex += 1
                 end if
@@ -767,6 +737,7 @@ class LevelImpl
     end drawLevel
     
     %---------------------------------------------------------------------------
+    % David Delisle Lalancette
     body function getWalkableLayer() : ^ Layer
         result layers(cWalkableLayer)
     end getWalkableLayer
@@ -785,6 +756,7 @@ class LevelImpl
     end getTilePropertyObject
     
     %---------------------------------------------------------------------------
+    % David Delisle Lalancette
     body procedure checkTriggers( position : ^ Tuple2i )
     var triggerType : string := ""
         for i : 0 .. upper(triggers)
@@ -817,6 +789,7 @@ class LevelImpl
     end setUIManager
     
     %---------------------------------------------------------------------------
+    % David Delisle Lalancette, Richard Lalancette
     body procedure avatarAttack()
             % Ne peut pas attaquer tant que cooldown n'est pas <= 0
             if( avatar ->getAttackCooldown() > 0 ) then
@@ -858,6 +831,7 @@ class LevelImpl
     end avatarAttack
     
     %---------------------------------------------------------------------------
+    % David Delisle Lalancette
     body procedure monsterAttack()
             for i : 0 .. upper(spawnedMonsters)
                 if spawnedMonsters(i) -> isAvatarInFront(avatar -> position) then
@@ -902,16 +876,12 @@ class LevelImpl
         if( not inputProcessed ) then
             case inputEvent of
             % Direction sur le clavier (AWSD)
-            % Utilisation du bouton "potion"
-            label constants.ButtonB         : gameMessage := "go to next level"
+            label constants.ButtonB         :
             result true
             label constants.ButtonX         : 
             result true
-            label constants.ButtonY         : constants.debugDisplayWalkableLayer := not constants.debugDisplayWalkableLayer
+            label constants.ButtonY         :
             result true
-            label -13 : avatar -> loseHealth(20)
-            label -63 : avatar -> gainHealth(20)
-                result false
             end case
         end if
         result false
@@ -933,6 +903,7 @@ class LevelImpl
     end isMobileAt
     
     %---------------------------------------------------------------------------
+    % David Delisle Lalancette
     body function getAvatarScore() : int
         result avatar -> score
     end getAvatarScore

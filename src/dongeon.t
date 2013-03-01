@@ -1,6 +1,6 @@
 %---------------------------------------------------------------------------%
 % Dongeon                                                                   %
-% Par: David Delisle Lalancette, Richard Lalancette                          %
+% Par: David Delisle Lalancette, Richard Lalancette                         %
 % Explorer un dongeon rempli de tresores et de perils.                      %
 % Tuer les monstres et voler leur tresores                                  %
 %                                                                           %

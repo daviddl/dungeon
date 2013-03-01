@@ -10,7 +10,7 @@ class Avatar
     body procedure create(x:int, y:int)
         Mobile.create(x,y)
         speed := 8
-        damage := 50
+        damage := 15
         health := 100
         score := 0
     end create
@@ -21,18 +21,21 @@ class Avatar
     end destroy
 
     %---------------------------------------------------------------------------
+    % David Delisle Lalancette
     % Sert a augmenter le points de sante du joueur en utilisant une potion
     body procedure setScore(newScore : int)
         score := newScore
     end setScore
 
     %---------------------------------------------------------------------------
+    % Richard Lalancette
     % Place "avatar" a l'entre du "level"
     body procedure placeAvatar
         currentLevel -> moveAvatar( position, transitPosition )
     end placeAvatar
     
     %---------------------------------------------------------------------------
+    % David Delisle Lalancette, Richard Lalancette
     % Animation du personnage en determinant la direction et l'etat de son mouvement.
     body function processInput( inputEvent : int ) : boolean
         case inputEvent of
@@ -47,20 +50,16 @@ class Avatar
             %Utilisation du bouton "potion"
             label constants.DPadUp          : moveInDirection( constants.cNorth )
                 result true
-            label constants.DPadUpRight     : 
             label constants.DPadRight       : moveInDirection( constants.cEast )
                 result true
-            label constants.DPadDownRight   : 
             label constants.DPadDown        : moveInDirection( constants.cSouth )
                 result true
-            label constants.DPadDownLeft    : 
             label constants.DPadLeft        : moveInDirection( constants.cWest )
                 result true
-            label constants.DPadUpLeft      : 
             label constants.ButtonA         : currentLevel->avatarAttack()
                                             checkInteractableInDirection ()
                 result true
-            label constants.ButtonB         : currentLevel->gameMessage := "go to next level"
+            label constants.ButtonB         :
                 result true
             label constants.ButtonX         :
                 result true
@@ -73,13 +72,14 @@ class Avatar
     end processInput
     
     %---------------------------------------------------------------------------
+    % David Delisle Lalancette
     % Verifie si le joueur est sur une tuile du type "Trigger"
     body procedure checkTriggers
         currentLevel -> checkTriggers( position )
     end checkTriggers
     
     %---------------------------------------------------------------------------
-    %
+    % David Delisle Lalancette
     body function attackInDirection() : ^ Tuple2i
         var targetTileX : int
         var targetTileY : int

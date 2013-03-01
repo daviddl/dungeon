@@ -20,6 +20,7 @@ class Monster
     damage := 5
 
     %---------------------------------------------------------------------------
+    % David Delisle Lalancette
     procedure chaseAvatar (avatarPosition: ^ Tuple2i)
     var avatarX : int := 0
     var avatarY : int := 0
@@ -42,6 +43,7 @@ class Monster
     end chaseAvatar
     
     %---------------------------------------------------------------------------
+    % David Delisle Lalancette, Richard Lalancette
     % Mise a jour du monstre
     body procedure update
         if not targetInSight then
@@ -66,6 +68,7 @@ class Monster
     end update
     
     %---------------------------------------------------------------------------
+    % David Delisle Lalancette
     body function isAvatarInFront(avatarPosition : ^ Tuple2i) : boolean
         if mobileState not= mobileStateEnum.dying or mobileState not= mobileStateEnum.dead or mobileState not= mobileStateEnum.gone then
             if getTileInDirection( position ) -> equals( avatarPosition ) then
@@ -86,6 +89,7 @@ class Monster
     end setTargetObject
     
     %---------------------------------------------------------------------------
+    % David Delisle Lalancette
     %
     body function attackInDirection() : ^ Tuple2i
         var targetTileX : int
